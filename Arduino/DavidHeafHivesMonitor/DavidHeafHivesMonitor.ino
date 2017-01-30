@@ -12,7 +12,7 @@ volatile bool adcDone;
 ISR(WDT_vect) { Sleepy::watchdogEvent(); }
 ISR(ADC_vect) { adcDone = true; }
 
-#define SLEEP_DURATION 1000 * 2
+#define SLEEP_DURATION 1000 * 30 // 1000ms * 30
 
 /**
  *  Nous utilisons la librairie OneWire
@@ -114,8 +114,12 @@ RTC_DS3231 RTC;
 void setup(void)
 {
   // Initialisation du port série
-  Serial.begin(9600);
-  Serial.println("start");
+  #if DEBUG
+    Serial.begin(9600);
+    Serial.println("start");
+  #endif
+
+
   if(SD.begin(chipSelect))
   {
     sDisReady = true;
@@ -129,8 +133,10 @@ void loop(void)
 {
 
     String tolog = builString();
+  #if DEBUG
     Serial.println(tolog);
     Serial.flush();delay(5);
+  #endif
 
     if (sDisReady) {
       /**
