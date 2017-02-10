@@ -33,17 +33,20 @@ void setup(void) {
 void getDeviceAddress(void) {
   byte i;
   byte adresse[8];
-  
-  Serial.println("recuperation des adresses...\n\r");
+  int countS = 1;
+  Serial.println("fetching sensors addresses...\n\r");
   /* initiate a search for the OneWire object we created and read its value into
   addr array we declared above*/
   
   while(ds.search(adresse)) {
-    Serial.print("adresse :\t");
+    Serial.print("DeviceAddress temperature");
+    Serial.print(countS);Serial.print(" {");
     //read each byte in the address array
     for( i = 0; i < 8; i++) {
+      
       Serial.print("0x");
       if (adresse[i] < 16) {
+        
         Serial.print('0');
       }
       // print each byte in the address array in hex format
@@ -51,12 +54,17 @@ void getDeviceAddress(void) {
       if (i < 7) {
         Serial.print(", ");
       }
+      else
+      {
+        Serial.print("}; ");
+        }
     }
     // a check to make sure that what we read is correct.
     if ( OneWire::crc8( adresse, 7) != adresse[7]) {
         Serial.print("CRC is not valid!\n");
         return;
     }
+    countS++;
     Serial.println();
   }
   ds.reset_search();
