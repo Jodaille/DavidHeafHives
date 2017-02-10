@@ -80,7 +80,7 @@ String buildTime()
   }
   dateString += day;
 
-  dateString += " ";
+  dateString += "T";
   int hour = now.hour();
   if(hour<10)
   {
