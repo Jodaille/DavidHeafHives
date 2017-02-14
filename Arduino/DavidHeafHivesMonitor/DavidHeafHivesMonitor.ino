@@ -82,7 +82,9 @@ DeviceAddress temperature6 = { 0x28, 0xFF, 0xF5, 0x04, 0x36, 0x16, 0x03, 0x99 };
  * cf: https://www.arduino.cc/en/Tutorial/Datalogger
  */
 #include <SPI.h>
-#include <SD.h>
+//#include <SD.h>
+#include "SdFat.h"
+SdFat SD;
 
 // Arduino Uno pin 4
 // cf: https://www.arduino.cc/en/Reference/SPI
