@@ -1,10 +1,15 @@
 <?php
-/*
+/**
+
+example of query:
 http://localhost/emoncms/input/bulk.json?data=[[1480115360,16,1137],[1480115361,16,1437,3164],[1480115362,16,1412,3077]]&time=0
 
+example of CSV line:
 2017-02-20T14:17:34,19.94,32.81,27.75,22.63,19.94,12.56
 
 */
+// Timezone used by Datetime
+date_default_timezone_set('Europe/London');
 
 $apikey = 'CHANGEME';
 //$apikey = 'e5e2f1e2c5cfc557b2889e9583894cf2';// APIKEY sample
